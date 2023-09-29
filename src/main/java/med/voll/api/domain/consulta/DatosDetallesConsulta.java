@@ -6,4 +6,8 @@ public record DatosDetallesConsulta(Long id, Long idPaciente, Long idMedico, Loc
     public DatosDetallesConsulta(DatosAgendarConsulta datosAgendarConsulta){
         this(datosAgendarConsulta.id(), datosAgendarConsulta.idPaciente(), datosAgendarConsulta.idMedico(), datosAgendarConsulta.fecha());
     }
+
+    public DatosDetallesConsulta(Consulta consulta) {
+        this(consulta.getId(), consulta.getPaciente().getId(), consulta.getMedico().getId(), consulta.getData());
+    }
 }

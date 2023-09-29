@@ -22,7 +22,10 @@ public class SecurityConfigurations {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(csrf -> csrf.disable()).sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) //le indicamos a Spring el tipo de sesion
-                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/login")
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST, "/login")
+                        .permitAll()
+                        .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
